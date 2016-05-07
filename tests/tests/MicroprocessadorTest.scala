@@ -39,6 +39,7 @@ import model.DIV
 
 	@After
 	def tearDown()  {
+	  memory = null
 	  micro= null
 	}
 
@@ -78,6 +79,15 @@ import model.DIV
 		micro.execute(inst)
 		assertEquals(micro.A,15)
 		assertEquals(micro.B,0)
+	}
+	
+	@Test
+	def testLoadAProgramInMemory() {
+	  var inst = Array[Instruction](new LODV(2),new STR(0), new LODV(8),new SWAP(),new LODV(5),new ADD(), new SWAP(),new LOD(0), new ADD())
+		
+		//var program =new Program("Excell" , inst)
+	  //micro.load(program
+	      
 	}
 	
 

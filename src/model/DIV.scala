@@ -1,6 +1,6 @@
 package model
 
-class DIV extends Instruction{
+class DIV extends Instruction with MathInstruction{
   
   
   override def executeOn(micro: Microprocessor): Unit = {
@@ -8,8 +8,7 @@ class DIV extends Instruction{
     {
       throw new DivideByZeroException("No se puede dividir por 0")
     }
-    // hacer lo mismo que el ADD
-    micro.A = micro.A / micro.B
+    validateValueLimits(micro)
     super.executeOn(micro)
   }
 }

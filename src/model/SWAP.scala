@@ -5,8 +5,8 @@ class SWAP extends Instruction {
   override def executeOn(micro: Microprocessor): Unit = {
     
     var temp= micro.A
-    micro.A=micro.B
-    micro.B=temp
+    micro.setA(micro.B)
+    micro.setB(temp)
     super.executeOn(micro)
   }
 }
