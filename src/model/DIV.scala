@@ -9,6 +9,5 @@ class DIV extends Instruction with MathInstruction{
       throw new DivideByZeroException("No se puede dividir por 0")
     }
     validateValueLimits(micro)
-    super.executeOn(micro)
   }
 }

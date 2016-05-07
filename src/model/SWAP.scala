@@ -7,6 +7,5 @@ class SWAP extends Instruction {
     var temp= micro.A
     micro.setA(micro.B)
     micro.setB(temp)
-    super.executeOn(micro)
   }
 }

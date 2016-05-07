@@ -5,7 +5,6 @@ class LODV (value :Integer) extends Instruction{
 
   override def executeOn(micro: Microprocessor): Unit = {
     micro.setA(valueLODV)
-    super.executeOn(micro)
   }
   
 }

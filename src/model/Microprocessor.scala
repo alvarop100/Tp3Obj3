@@ -8,10 +8,15 @@ class Microprocessor( m :Memory) {
   var A =0
   var B =0
   
-  def execute (instructions:Array[Instruction]){
-    instructions.foreach { inst => inst.executeOn(this)}
+  def executeAll(instructions:Array[Instruction]){
+    instructions.foreach { inst => execute(inst)}
   }
-  
+
+  def execute(inst: Instruction): Unit ={
+    inst.executeOn(this)
+    pc +=1
+  }
+
   def setA(value :Integer){
     validateValueLimits(value)
     A=value
@@ -25,12 +30,15 @@ class Microprocessor( m :Memory) {
       throw new Exception("el valor supera alguno de los limites de Byte")
     }
   }
-  
+
   def load(program :Program){
     memory.load(program)
   }
-  
+
   def start(){
-    execute(memory.getRunningProgramInstructions)
+    A = 0
+    B = 0
+    pc = 1
+    executeAll(memory.getRunningProgramInstructions)
   }
 }
