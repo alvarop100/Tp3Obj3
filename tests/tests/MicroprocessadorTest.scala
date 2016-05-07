@@ -1,13 +1,12 @@
+
 package tests
 
 
 
 import model.SWAP
-
+import model.Program
 import model.LODV;
-
 import  org.junit.Assert._;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +22,7 @@ import model.DivideByZeroException
 import model.DivideByZeroException
 import model.DivideByZeroException
 import model.DIV
+import model.Program
 
 
  class TestMicroprocesador {
@@ -85,8 +85,21 @@ import model.DIV
 	def testLoadAProgramInMemory() {
 	  var inst = Array[Instruction](new LODV(2),new STR(0), new LODV(8),new SWAP(),new LODV(5),new ADD(), new SWAP(),new LOD(0), new ADD())
 		
-		//var program =new Program("Excell" , inst)
-	  //micro.load(program
+		var program =new Program("Excell" , inst)
+	  micro.load(program)
+	  assertEquals(memory.runningProgram, program)
+	      
+	}
+	
+	@Test
+	def testStartMicro() {
+	  var inst = Array[Instruction](new LODV(2),new STR(0), new LODV(8),new SWAP(),new LODV(5),new ADD(), new SWAP(),new LOD(0), new ADD())
+		
+		var program =new Program("Excell" , inst)
+	  micro.load(program)
+	  micro.start
+	  assertEquals(micro.A,15)
+		assertEquals(micro.B,0)
 	      
 	}
 	

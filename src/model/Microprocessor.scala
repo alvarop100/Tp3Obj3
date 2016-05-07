@@ -25,4 +25,12 @@ class Microprocessor( m :Memory) {
       throw new Exception("el valor supera alguno de los limites de Byte")
     }
   }
+  
+  def load(program :Program){
+    memory.load(program)
+  }
+  
+  def start(){
+    execute(memory.getRunningProgramInstructions)
+  }
 }
