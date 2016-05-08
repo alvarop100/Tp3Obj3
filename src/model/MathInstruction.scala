@@ -9,4 +9,10 @@ trait MathInstruction {
      method.invoke(micro.A :Integer, micro.B:Integer)
      
   }
+
+  def applyInRegisters(microprocessor: Microprocessor,f: Integer => Integer => Integer): Unit ={
+    micro.setA(f (micro.A,micro.B))
+    micro.setB(0)
+    validateValueLimits(micro)
+  }
 }
