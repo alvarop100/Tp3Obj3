@@ -1,23 +1,20 @@
 package model
 
-import scala.collection.mutable
+class Memory( size : Int) {
 
-class Memory( size : Integer) {
-  
-  val register =  mutable.ArrayBuffer.fill(size)(0)
+  var state = new MemoryState(size)
   var runningProgram :Program = null
   
-  def save(addr:Integer, value: Integer){
+  def save(addr:Int, value: Int){
     if(addr>1023) throw new IllegalArgumentException("Fuera de Rango de Memoria")
     
-    register(addr) = value
-    
+    state.register(addr) = value
   }
   
-  def loadInstruction(addr :Integer) :Integer ={
+  def loadInstruction(addr :Int) :Int ={
     if(addr>1023) throw new IllegalArgumentException("Fuera de Rango de Memoria")
     
-    register(addr) 
+    state.register(addr)
   }
   def load(program :Program){
     runningProgram = program

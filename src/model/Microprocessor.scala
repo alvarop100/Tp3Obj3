@@ -1,44 +1,64 @@
-
-
 package model
 
 class Microprocessor( m :Memory) {
-  var memory =m 
-  var pc=1
-  var A =0
-  var B =0
-  
-  def executeAll(instructions:Array[Instruction]){
-    instructions.foreach { inst => execute(inst)}
-  }
+  var stateContainer = new StateContainer(this)
+  var state = new MicroprocessorState()
+  var memory = m
 
-  def execute(inst: Instruction): Unit ={
-    inst.executeOn(this)
-    pc +=1
-  }
-
-  def setA(value :Integer){
-    validateValueLimits(value)
-    A=value
-  }
-  def setB(value :Integer){
-    validateValueLimits(value)
-    B=value
-  }
-  def validateValueLimits(value : Integer){
-    if(value<Byte.MinValue || value>Byte.MaxValue){
-      throw new Exception("el valor supera alguno de los limites de Byte")
-    }
-  }
 
   def load(program :Program){
     memory.load(program)
   }
 
   def start(){
-    A = 0
-    B = 0
-    pc = 1
+    state.restart
+    stateContainer.restart
     executeAll(memory.getRunningProgramInstructions)
   }
+
+  def stop(): Unit ={
+    //falta implementar bien
+    throw new Exception
+  }
+
+  def executeAll(instructions:Array[Instruction]){
+    instructions.foreach { inst => execute(inst)}
+  }
+
+  def execute(inst: Instruction): Unit ={
+    stateContainer.saveState(state.pc)
+    inst.executeOn(this)
+    state.pc+=1
+  }
+
+  def executeNext(): Unit ={
+    var instructions = memory.getRunningProgramInstructions
+    execute(instructions(state.pc-1))
+  }
+
+  def backUltimateInstructionState(): Unit ={
+    var oldState = stateContainer.getState(state.pc)
+    memory.state = oldState.memoryState
+    state = oldState.microState
+  }
+
+  def validateValueLimits(value : Int){
+    if(value<Byte.MinValue || value>Byte.MaxValue){
+      throw new Exception("El valor supera alguno de los limites de Byte")
+    }
+  }
+
+  def setA(value :Int){
+    validateValueLimits(value)
+    state.A = value
+  }
+
+  def setB(value :Int){
+    validateValueLimits(value)
+    state.B = value
+  }
+
+
+
+
 }

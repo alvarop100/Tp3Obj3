@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="scala-sdk-2.8.0.final" type="Scala">
+    <properties>
+      <option name="languageLevel" value="Scala_2_8" />
+      <compiler-classpath>
+        <root url="file://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.8.0.jar" />
+        <root url="file://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-compiler/jars/scala-compiler-2.8.0.jar" />
+      </compiler-classpath>
+    </properties>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.8.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="http://www.scala-lang.org/api/2.8.0.final/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

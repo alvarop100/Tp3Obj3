@@ -8,6 +8,6 @@ class DIV extends Instruction with MathInstruction{
     {
       throw new DivideByZeroException("No se puede dividir por 0")
     }
-    applyInRegisters(micro,/)
+    applyInRegisters(micro,_/_)
   }
 }
