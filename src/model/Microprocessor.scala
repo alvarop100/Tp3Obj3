@@ -57,6 +57,14 @@ class Microprocessor( m :Memory) {
     validateValueLimits(value)
     state.B = value
   }
+  
+  def getA() :Integer ={
+    state.A
+  }
+  
+  def getB() :Integer ={
+    state.B
+  }
 
 
 

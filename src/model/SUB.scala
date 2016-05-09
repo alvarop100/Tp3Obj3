@@ -2,6 +2,13 @@ package model
 
 class SUB extends Instruction with MathInstruction{
   
-  override def executeOn(micro: Microprocessor): Unit = { applyInRegisters(micro,_-_) }
+
+
+  override def executeOn(micro: Microprocessor): Unit = {
+    validateValueLimits(micro,"-")
+   
+    
+  }
+
   
 }

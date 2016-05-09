@@ -47,38 +47,38 @@ import model.Program
 	def testPc3PositionsByThreeNOP() {
 	  var nop = new NOP()
 	  var inst= Array[Instruction](nop,nop,nop)
-		micro.execute(inst)
-		assertEquals(micro.pc, 4)
+		micro.executeAll(inst)
+		assertEquals(micro.state.pc, 4)
 	}
 	
 	@Test
 	def testEvaluateAdditionOfRegisters() {
 		var inst = Array[Instruction](new LODV(10),new SWAP(),new LODV(22),new ADD())
-		micro.execute(inst)
-		assertEquals(micro.B,0)
-		assertEquals(micro.A,32)
+		micro.executeAll(inst)
+		assertEquals(micro.getB,0)
+		assertEquals(micro.getA,32)
 	}
 	
 	@Test
 	def testEvaluateAdditionOfRegistersOverpassMaxValue() {
 		var inst = Array[Instruction](new LODV(100),new SWAP(),new LODV(50),new ADD())
-		micro.execute(inst)
-		assertEquals(micro.A, 127)
-		assertEquals(micro.B, 23)
+		micro.executeAll(inst)
+		assertEquals(micro.getA, 127)
+		assertEquals(micro.getB, 23)
 	}
 	
 	@Test  ( expected = classOf[DivideByZeroException])
 	def testDivideByZeroThrowException() {
 		var inst = Array[Instruction](new LODV(0),new SWAP(),new LODV(2),new DIV())
-		micro.execute(inst)
+		micro.executeAll(inst)
 	}
 	
 	@Test
 	def testEvaluateAdditionOfThreeRegisters() {
 		var inst = Array[Instruction](new LODV(2),new STR(0), new LODV(8),new SWAP(),new LODV(5),new ADD(), new SWAP(),new LOD(0), new ADD())
-		micro.execute(inst)
-		assertEquals(micro.A,15)
-		assertEquals(micro.B,0)
+		micro.executeAll(inst)
+		assertEquals(micro.getA,15)
+		assertEquals(micro.getB,0)
 	}
 	
 	@Test
@@ -98,8 +98,8 @@ import model.Program
 		var program =new Program("Excell" , inst)
 	  micro.load(program)
 	  micro.start
-	  assertEquals(micro.A,15)
-		assertEquals(micro.B,0)
+	  assertEquals(micro.getA,15)
+		assertEquals(micro.getB,0)
 	      
 	}
 	

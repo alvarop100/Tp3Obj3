@@ -4,7 +4,7 @@ import scala.collection.mutable
 
 class StateContainer(micro : Microprocessor){
   var microprocessor = micro
-  var states = new mutable.ArrayBuffer.fill()(0)
+  var states = new mutable.ArrayBuffer[GeneralState]()
 
   def saveState(i :Int): Unit ={
     var microState = microprocessor.state
@@ -17,7 +17,7 @@ class StateContainer(micro : Microprocessor){
   }
 
   def restart(): Unit ={
-    states = new mutable.ArrayBuffer.fill()(0)
+    states = new mutable.ArrayBuffer[GeneralState]()
   }
 
 }
